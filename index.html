@@ -203,24 +203,26 @@
     </footer>
 
     <script>
-        // Scroll-responsive flag waving animation
+        // Gentle scroll-responsive flag waving animation
         let lastScrollY = window.scrollY;
+        let scrollTimeout;
         const flagBackground = document.querySelector('.flag-background');
 
         window.addEventListener('scroll', () => {
             const currentScrollY = window.scrollY;
             const scrollDelta = Math.abs(currentScrollY - lastScrollY);
 
-            // Increase animation speed based on scroll speed
-            const animationSpeed = Math.max(0.5, 3 - (scrollDelta / 100));
-            flagBackground.style.animationDuration = animationSpeed + 's';
-
-            // Add extra intensity when scrolling fast
-            if (scrollDelta > 50) {
-                flagBackground.style.transform = `scale(1.02) translateZ(20px)`;
-            } else {
-                flagBackground.style.transform = 'scale(1) translateZ(0)';
+            // Gentle animation speed change - subtle and smooth
+            if (scrollDelta > 5) {
+                const animationSpeed = Math.max(2.5, 4 - (scrollDelta / 200));
+                flagBackground.style.animationDuration = animationSpeed + 's';
             }
+
+            // Reset to normal speed after scrolling stops
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                flagBackground.style.animationDuration = '4s';
+            }, 150);
 
             lastScrollY = currentScrollY;
         });
