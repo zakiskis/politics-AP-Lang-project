@@ -122,9 +122,77 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--navy-dark) 100%);
+    background: var(--navy-dark);
     margin-top: 70px;
     overflow: hidden;
+}
+
+/* Waving American Flag Background */
+.flag-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.4;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            #C41E3A 0px,
+            #C41E3A 7.7%,
+            #FFFFFF 7.7%,
+            #FFFFFF 15.4%
+        );
+    animation: wave 3s ease-in-out infinite;
+    transform-origin: center;
+    filter: brightness(0.9) contrast(1.1);
+}
+
+.flag-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 46%;
+    background: #002868;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+.flag-background::after {
+    content: '★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 46%;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    line-height: 1.8;
+    word-spacing: 1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes wave {
+    0%, 100% {
+        transform: perspective(1000px) rotateX(0deg) rotateY(2deg);
+        filter: brightness(0.9) contrast(1.1);
+    }
+    25% {
+        transform: perspective(1000px) rotateX(2deg) rotateY(-1deg);
+        filter: brightness(1.0) contrast(1.15);
+    }
+    50% {
+        transform: perspective(1000px) rotateX(-1deg) rotateY(3deg);
+        filter: brightness(0.85) contrast(1.05);
+    }
+    75% {
+        transform: perspective(1000px) rotateX(1deg) rotateY(-2deg);
+        filter: brightness(0.95) contrast(1.1);
+    }
 }
 
 .hero-overlay {
@@ -133,14 +201,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background:
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 50px,
-            rgba(196, 30, 58, 0.03) 50px,
-            rgba(196, 30, 58, 0.03) 100px
-        );
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+    mix-blend-mode: multiply;
 }
 
 .hero-stars {
@@ -529,6 +591,26 @@ section {
     margin-left: auto;
     margin-right: auto;
     line-height: 1.8;
+}
+
+.cta-content .quote-text {
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--white);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-left: 4px solid var(--gold-accent);
+    margin: 2rem auto;
+    text-align: left;
+}
+
+.cta-content .cta-tagline {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold-accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .cta-buttons {
