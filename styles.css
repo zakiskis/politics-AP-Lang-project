@@ -432,6 +432,27 @@ section {
     margin: 0 auto;
 }
 
+.campaign-photos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.campaign-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 4px solid var(--gold-accent);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.campaign-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
 .about-text h3 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
@@ -737,6 +758,11 @@ section {
     .platform-grid,
     .values-grid {
         grid-template-columns: 1fr;
+    }
+
+    .campaign-photos {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .hero-buttons,
