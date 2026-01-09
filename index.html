@@ -268,10 +268,45 @@
     </footer>
 
     <script>
-        // Enhanced Fizzle scroll animation with partitions and grain
+        // Enhanced Fizzle scroll animation with velocity-based speed
         const animateElements = document.querySelectorAll('.platform-card, .value-item, .quote-box, .scripture-quote, .enhanced-games-highlight, .credential-item, .about-text, .enhanced-content > p, .enhanced-content > h3, .cta-content, .enhanced-games-photo, .campaign-photo, .collab-photo');
 
-        // Determine if element should be partitioned (large images and boxes)
+        // Scroll velocity tracking
+        let lastScrollTop = window.pageYOffset;
+        let lastScrollTime = Date.now();
+        let scrollVelocity = 0;
+        let velocitySmoothing = [];
+
+        // Calculate scroll velocity
+        function updateScrollVelocity() {
+            const currentScrollTop = window.pageYOffset;
+            const currentTime = Date.now();
+            const timeDelta = currentTime - lastScrollTime;
+
+            if (timeDelta > 0) {
+                const scrollDelta = Math.abs(currentScrollTop - lastScrollTop);
+                const instantVelocity = scrollDelta / timeDelta;
+
+                // Smooth velocity over last few frames
+                velocitySmoothing.push(instantVelocity);
+                if (velocitySmoothing.length > 5) velocitySmoothing.shift();
+
+                scrollVelocity = velocitySmoothing.reduce((a, b) => a + b, 0) / velocitySmoothing.length;
+            }
+
+            lastScrollTop = currentScrollTop;
+            lastScrollTime = currentTime;
+        }
+
+        // Get animation speed based on velocity
+        function getAnimationSpeed() {
+            // Map velocity (0-5) to speed multiplier (0.3-3)
+            const normalizedVelocity = Math.min(scrollVelocity * 2, 5);
+            const speedMultiplier = 0.3 + (normalizedVelocity / 5) * 2.7;
+            return speedMultiplier;
+        }
+
+        // Determine if element should be partitioned
         function shouldPartition(el) {
             const height = el.offsetHeight;
             const width = el.offsetWidth;
@@ -287,7 +322,6 @@
                 el.classList.add('fizzle-partition');
                 const partitionCount = Math.min(12, Math.floor(el.offsetHeight / 50));
 
-                // Create multiple partition layers for cascading effect
                 for (let i = 0; i < partitionCount; i++) {
                     const partition = document.createElement('div');
                     partition.style.cssText = `
@@ -302,12 +336,12 @@
                             rgba(255,255,255,0.9) 100%);
                         opacity: 1;
                         pointer-events: none;
-                        transition: transform ${0.6 + i * 0.08}s ease-out, opacity ${0.6 + i * 0.08}s ease-out;
                         transform: translateX(0);
                         z-index: 10;
                         mix-blend-mode: overlay;
                     `;
                     partition.classList.add('partition-layer');
+                    partition.dataset.index = i;
                     el.appendChild(partition);
                 }
             }
@@ -316,11 +350,9 @@
         // Add scroll-animate and grain effect to all elements
         animateElements.forEach((el, index) => {
             el.classList.add('scroll-animate', 'grain-effect');
-            // Alternate between left and right fizzle
             if (index % 3 === 0) el.classList.add('fizzle-left');
             else if (index % 3 === 1) el.classList.add('fizzle-right');
 
-            // Ensure element has position for partitions
             if (window.getComputedStyle(el).position === 'static') {
                 el.style.position = 'relative';
             }
@@ -328,7 +360,42 @@
             createPartitions(el);
         });
 
+        function animatePartitions(el, direction, speed) {
+            const partitions = el.querySelectorAll('.partition-layer');
+            const baseDelay = 60 / speed; // Faster speed = shorter delay
+            const baseDuration = 600 / speed; // Faster speed = shorter duration
+
+            partitions.forEach((partition, i) => {
+                const index = parseInt(partition.dataset.index);
+                const delay = index * baseDelay;
+                const duration = baseDuration + (index * 80 / speed);
+
+                setTimeout(() => {
+                    partition.style.transition = `transform ${duration}ms ease-out, opacity ${duration}ms ease-out`;
+
+                    if (direction === 'in') {
+                        partition.style.transform = 'translateX(100%)';
+                        partition.style.opacity = '0';
+                    } else {
+                        partition.style.transform = 'translateX(0)';
+                        partition.style.opacity = '1';
+                    }
+                }, delay);
+            });
+        }
+
+        function updateElementTransitions(speed) {
+            const duration = 800 / speed;
+            animateElements.forEach(el => {
+                el.style.transition = `opacity ${duration}ms ease-out, transform ${duration}ms ease-out, filter ${duration}ms ease-out`;
+            });
+        }
+
         function checkScroll() {
+            updateScrollVelocity();
+            const speed = getAnimationSpeed();
+            updateElementTransitions(speed);
+
             const windowHeight = window.innerHeight;
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const scrollBottom = scrollTop + windowHeight;
@@ -339,43 +406,29 @@
                 const elementBottom = elementTop + el.offsetHeight;
                 const elementMiddle = elementTop + (el.offsetHeight / 2);
 
-                // Element is in the "fizzle in" zone (entering from bottom)
+                // Element is in viewport
                 if (elementMiddle > scrollTop && elementMiddle < scrollBottom) {
-                    el.classList.add('animate-in');
-                    el.classList.remove('animate-out');
-
-                    // Cascade partition reveal
-                    if (!el.classList.contains('has-fizzled')) {
-                        el.classList.add('has-fizzled');
-                        const partitions = el.querySelectorAll('.partition-layer');
-                        partitions.forEach((partition, i) => {
-                            setTimeout(() => {
-                                partition.style.transform = 'translateX(100%)';
-                                partition.style.opacity = '0';
-                            }, i * 60);
-                        });
+                    if (!el.classList.contains('animate-in')) {
+                        el.classList.add('animate-in');
+                        el.classList.remove('animate-out');
+                        animatePartitions(el, 'in', speed);
                     }
                 }
-                // Element is above viewport (fizzle out at top)
+                // Element is above viewport (scrolled past)
                 else if (elementBottom < scrollTop + 100) {
-                    el.classList.remove('animate-in');
-                    el.classList.add('animate-out');
-
-                    // Reset partitions when scrolling back up
-                    const partitions = el.querySelectorAll('.partition-layer');
-                    partitions.forEach((partition, i) => {
-                        setTimeout(() => {
-                            partition.style.transform = 'translateX(0)';
-                            partition.style.opacity = '1';
-                        }, i * 40);
-                    });
-                    el.classList.remove('has-fizzled');
+                    if (!el.classList.contains('animate-out')) {
+                        el.classList.remove('animate-in');
+                        el.classList.add('animate-out');
+                        animatePartitions(el, 'out', speed);
+                    }
                 }
-                // Element is below viewport (reset for next scroll up)
+                // Element is below viewport
                 else if (elementTop > scrollBottom) {
-                    el.classList.remove('animate-in', 'animate-out', 'has-fizzled');
+                    el.classList.remove('animate-in', 'animate-out');
+                    // Reset partitions instantly
                     const partitions = el.querySelectorAll('.partition-layer');
                     partitions.forEach(partition => {
+                        partition.style.transition = 'none';
                         partition.style.transform = 'translateX(0)';
                         partition.style.opacity = '1';
                     });
