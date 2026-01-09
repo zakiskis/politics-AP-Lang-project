@@ -29,7 +29,6 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="flag-background"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="american-flag-accent"></div>
@@ -154,6 +153,42 @@
         </div>
     </section>
 
+    <!-- Enhanced Games Section -->
+    <section id="enhanced-games" class="enhanced-games">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">AMERICAN EXCELLENCE</span>
+                <h2>Supporting the Enhanced Games</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="enhanced-content">
+                <h3>Olympic Crisis: A New Path Forward</h3>
+                <p class="lead-text">Following the Olympic cheating scandal where many American athletes were caught, it's time for a bold new direction. You know what a real "scandal" is? Radical liberal democrat scammers are opening up fraudulent daycares in Minnesota. Please.</p>
+
+                <div class="quote-box">
+                    <p>"If you have the resources to make yourself a better person, why not optimize yourself? I love optimizing myself. I like to apply myself to this country, as well. I will optimize our country."</p>
+                </div>
+
+                <p>We just learned that some brave Olympians are standing up for what they believe. I agree with them. If you're not optimizing yourself, you're not trying hard enough, and you will fall behind those who do. As a country, we want to be number one. To do that, we will do anything we can, including what some may call "unnatural" strategies.</p>
+
+                <p>We want to make America great, just like how Olympic athletes can make their performances great. This goes hand-in-hand with many of my policies. You all know about my outspoken beliefs on Ozempic, because I fully believe we need to Make America Look Great Again. Just like how we need American athletes to Perform Great Again.</p>
+
+                <div class="scripture-quote">
+                    <p><strong>Romans 12:2:</strong> "Do not conform to the pattern of this world, but be transformed by the renewing of your mind."</p>
+                </div>
+
+                <p>In order to make progress, we need to use every last resource. Only woke liberal snowflakes would call this a "scandal." To me, this is only displaying America's strength and impressive resourcefulness.</p>
+
+                <div class="enhanced-games-highlight">
+                    <h4>The Enhanced Games Initiative</h4>
+                    <p>ESPN recently launched the Enhanced Games, where athletes are allowed to use any and all assets to their fullest potential. <strong>I plan to increase my funding to this glorious program.</strong> I encourage progress and growth, and doping does just exactly that.</p>
+                </div>
+
+                <p class="closing-statement">If progress and growth sound good to you, you should vote for Seva Merica in the 2026 election.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Values Section -->
     <section id="values" class="values">
         <div class="container">
@@ -178,6 +213,10 @@
                 <div class="value-item">
                     <h3>American Exceptionalism</h3>
                     <p>America is the greatest nation on Earth. We make no apologies for our success and will always put America First.</p>
+                </div>
+                <div class="value-item">
+                    <h3>Optimization & Progress</h3>
+                    <p>If you're not optimizing yourself, you're not trying hard enough. We support the Enhanced Games and athletes using every resource to make America number one.</p>
                 </div>
             </div>
         </div>
@@ -222,30 +261,5 @@
         </div>
     </footer>
 
-    <script>
-        // Gentle scroll-responsive flag waving animation
-        let lastScrollY = window.scrollY;
-        let scrollTimeout;
-        const flagBackground = document.querySelector('.flag-background');
-
-        window.addEventListener('scroll', () => {
-            const currentScrollY = window.scrollY;
-            const scrollDelta = Math.abs(currentScrollY - lastScrollY);
-
-            // Gentle animation speed change - subtle and smooth
-            if (scrollDelta > 5) {
-                const animationSpeed = Math.max(2.5, 4 - (scrollDelta / 200));
-                flagBackground.style.animationDuration = animationSpeed + 's';
-            }
-
-            // Reset to normal speed after scrolling stops
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                flagBackground.style.animationDuration = '4s';
-            }, 150);
-
-            lastScrollY = currentScrollY;
-        });
-    </script>
 </body>
 </html>

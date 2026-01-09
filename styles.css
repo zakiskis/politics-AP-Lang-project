@@ -122,105 +122,9 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: var(--navy-dark);
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--navy-dark) 100%);
     margin-top: 70px;
     overflow: hidden;
-}
-
-/* Waving American Flag Background with 3D Shading */
-.flag-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0.6;
-    background-image:
-        repeating-linear-gradient(
-            0deg,
-            #C41E3A 0px,
-            #C41E3A 7.7%,
-            #FFFFFF 7.7%,
-            #FFFFFF 15.4%
-        );
-    transform-origin: left center;
-}
-
-/* Wave shading overlay - creates 3D depth effect */
-.flag-background::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-        repeating-linear-gradient(
-            90deg,
-            transparent 0%,
-            rgba(0, 0, 0, 0.15) 1%,
-            transparent 2%,
-            rgba(255, 255, 255, 0.15) 3%,
-            transparent 4%
-        ),
-        repeating-linear-gradient(
-            0deg,
-            transparent 0%,
-            rgba(0, 0, 0, 0.1) 1%,
-            transparent 2%
-        );
-    animation: waveShading 4s ease-in-out infinite;
-    mix-blend-mode: multiply;
-    pointer-events: none;
-}
-
-/* Blue canton with stars */
-.flag-background::after {
-    content: '★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 40%;
-    height: 46%;
-    background: #002868;
-    color: #FFFFFF;
-    font-size: 1.5rem;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 1rem;
-    line-height: 1.8;
-    word-spacing: 1rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.3);
-}
-
-/* 3D Wave shading animation */
-@keyframes waveShading {
-    0% {
-        background-position: 0px 0px, 0px 0px;
-        background-size: 30px 100%, 100% 20px;
-        filter: brightness(1) contrast(1.1);
-    }
-    25% {
-        background-position: -15px 5px, 5px -10px;
-        background-size: 35px 100%, 100% 25px;
-        filter: brightness(1.1) contrast(1.05);
-    }
-    50% {
-        background-position: -30px 0px, 0px -20px;
-        background-size: 30px 100%, 100% 20px;
-        filter: brightness(0.9) contrast(1.15);
-    }
-    75% {
-        background-position: -15px -5px, -5px -10px;
-        background-size: 35px 100%, 100% 25px;
-        filter: brightness(1.05) contrast(1.1);
-    }
-    100% {
-        background-position: 0px 0px, 0px 0px;
-        background-size: 30px 100%, 100% 20px;
-        filter: brightness(1) contrast(1.1);
-    }
 }
 
 .hero-overlay {
@@ -229,8 +133,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
-    mix-blend-mode: multiply;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
 }
 
 .hero-stars {
@@ -546,6 +449,106 @@ section {
     color: var(--text-gray);
     font-size: 1rem;
     line-height: 1.7;
+}
+
+/* ===========================
+   Enhanced Games Section
+   =========================== */
+
+.enhanced-games {
+    background: var(--white);
+    padding: 5rem 0;
+}
+
+.enhanced-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.enhanced-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--navy-dark);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.enhanced-content p {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.lead-text {
+    font-size: 1.3rem !important;
+    font-weight: 600;
+    color: var(--primary-blue) !important;
+}
+
+.quote-box {
+    background: var(--cream);
+    border-left: 6px solid var(--primary-red);
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quote-box p {
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--navy-dark);
+    margin: 0;
+}
+
+.scripture-quote {
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--primary-blue) 100%);
+    color: var(--white);
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.scripture-quote p {
+    font-size: 1.2rem;
+    color: var(--white) !important;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.enhanced-games-highlight {
+    background: var(--gold-accent);
+    color: var(--navy-dark);
+    padding: 2.5rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
+
+.enhanced-games-highlight h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.enhanced-games-highlight p {
+    font-size: 1.2rem;
+    color: var(--navy-dark) !important;
+    margin: 0;
+}
+
+.closing-statement {
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    text-align: center;
+    color: var(--primary-red) !important;
+    margin-top: 2rem !important;
 }
 
 /* ===========================
