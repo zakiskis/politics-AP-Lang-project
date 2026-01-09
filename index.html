@@ -268,15 +268,64 @@
     </footer>
 
     <script>
-        // Fizzle scroll animation
-        const animateElements = document.querySelectorAll('.platform-card, .value-item, .quote-box, .scripture-quote, .enhanced-games-highlight, .credential-item, .about-text, .enhanced-content > p, .enhanced-content > h3, .cta-content, .enhanced-games-photo');
+        // Enhanced Fizzle scroll animation with partitions and grain
+        const animateElements = document.querySelectorAll('.platform-card, .value-item, .quote-box, .scripture-quote, .enhanced-games-highlight, .credential-item, .about-text, .enhanced-content > p, .enhanced-content > h3, .cta-content, .enhanced-games-photo, .campaign-photo, .collab-photo');
 
-        // Add scroll-animate class to all elements
+        // Determine if element should be partitioned (large images and boxes)
+        function shouldPartition(el) {
+            const height = el.offsetHeight;
+            const width = el.offsetWidth;
+            return (height > 200 || width > 400) &&
+                   (el.tagName === 'IMG' || el.classList.contains('quote-box') ||
+                    el.classList.contains('enhanced-games-highlight') ||
+                    el.classList.contains('credential-item'));
+        }
+
+        // Create partition overlay for large elements
+        function createPartitions(el) {
+            if (shouldPartition(el)) {
+                el.classList.add('fizzle-partition');
+                const partitionCount = Math.min(12, Math.floor(el.offsetHeight / 50));
+
+                // Create multiple partition layers for cascading effect
+                for (let i = 0; i < partitionCount; i++) {
+                    const partition = document.createElement('div');
+                    partition.style.cssText = `
+                        position: absolute;
+                        top: ${(i / partitionCount) * 100}%;
+                        left: 0;
+                        width: 100%;
+                        height: ${(1 / partitionCount) * 100}%;
+                        background: linear-gradient(90deg,
+                            rgba(255,255,255,0.9) 0%,
+                            rgba(212,175,55,0.3) 50%,
+                            rgba(255,255,255,0.9) 100%);
+                        opacity: 1;
+                        pointer-events: none;
+                        transition: transform ${0.6 + i * 0.08}s ease-out, opacity ${0.6 + i * 0.08}s ease-out;
+                        transform: translateX(0);
+                        z-index: 10;
+                        mix-blend-mode: overlay;
+                    `;
+                    partition.classList.add('partition-layer');
+                    el.appendChild(partition);
+                }
+            }
+        }
+
+        // Add scroll-animate and grain effect to all elements
         animateElements.forEach((el, index) => {
-            el.classList.add('scroll-animate');
+            el.classList.add('scroll-animate', 'grain-effect');
             // Alternate between left and right fizzle
             if (index % 3 === 0) el.classList.add('fizzle-left');
             else if (index % 3 === 1) el.classList.add('fizzle-right');
+
+            // Ensure element has position for partitions
+            if (window.getComputedStyle(el).position === 'static') {
+                el.style.position = 'relative';
+            }
+
+            createPartitions(el);
         });
 
         function checkScroll() {
@@ -285,7 +334,8 @@
             const scrollBottom = scrollTop + windowHeight;
 
             animateElements.forEach(el => {
-                const elementTop = el.getBoundingClientRect().top + scrollTop;
+                const rect = el.getBoundingClientRect();
+                const elementTop = rect.top + scrollTop;
                 const elementBottom = elementTop + el.offsetHeight;
                 const elementMiddle = elementTop + (el.offsetHeight / 2);
 
@@ -294,20 +344,41 @@
                     el.classList.add('animate-in');
                     el.classList.remove('animate-out');
 
-                    // Add bounce effect when first appearing
+                    // Cascade partition reveal
                     if (!el.classList.contains('has-fizzled')) {
-                        el.classList.add('fizzle-bounce', 'has-fizzled');
-                        setTimeout(() => el.classList.remove('fizzle-bounce'), 600);
+                        el.classList.add('has-fizzled');
+                        const partitions = el.querySelectorAll('.partition-layer');
+                        partitions.forEach((partition, i) => {
+                            setTimeout(() => {
+                                partition.style.transform = 'translateX(100%)';
+                                partition.style.opacity = '0';
+                            }, i * 60);
+                        });
                     }
                 }
                 // Element is above viewport (fizzle out at top)
                 else if (elementBottom < scrollTop + 100) {
                     el.classList.remove('animate-in');
                     el.classList.add('animate-out');
+
+                    // Reset partitions when scrolling back up
+                    const partitions = el.querySelectorAll('.partition-layer');
+                    partitions.forEach((partition, i) => {
+                        setTimeout(() => {
+                            partition.style.transform = 'translateX(0)';
+                            partition.style.opacity = '1';
+                        }, i * 40);
+                    });
+                    el.classList.remove('has-fizzled');
                 }
                 // Element is below viewport (reset for next scroll up)
                 else if (elementTop > scrollBottom) {
-                    el.classList.remove('animate-in', 'animate-out');
+                    el.classList.remove('animate-in', 'animate-out', 'has-fizzled');
+                    const partitions = el.querySelectorAll('.partition-layer');
+                    partitions.forEach(partition => {
+                        partition.style.transform = 'translateX(0)';
+                        partition.style.opacity = '1';
+                    });
                 }
             });
         }
@@ -325,7 +396,9 @@
         checkScroll();
 
         // Check on page load after images load
-        window.addEventListener('load', checkScroll);
+        window.addEventListener('load', () => {
+            setTimeout(checkScroll, 100);
+        });
     </script>
 </body>
 </html>
