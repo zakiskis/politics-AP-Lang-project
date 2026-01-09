@@ -268,169 +268,19 @@ body {
     overflow: hidden;
 }
 
-/* Waving US Flag Background with 50 stars */
-.hero::before {
-    content: '';
+/* Video Background */
+.hero-video-bg {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image:
-        /* 50 Stars in 9 rows (alternating 6 and 5) */
-        /* Row 1 - 6 stars */
-        radial-gradient(circle at 3% 2%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 6.5% 2%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 10% 2%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 13.5% 2%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 17% 2%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 20.5% 2%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        /* Row 2 - 5 stars */
-        radial-gradient(circle at 4.75% 4%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 8.25% 4%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 11.75% 4%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 15.25% 4%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 18.75% 4%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        /* Row 3 - 6 stars */
-        radial-gradient(circle at 3% 6%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 6.5% 6%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 10% 6%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 13.5% 6%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 17% 6%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 20.5% 6%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        /* Row 4 - 5 stars */
-        radial-gradient(circle at 4.75% 8%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 8.25% 8%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 11.75% 8%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 15.25% 8%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 18.75% 8%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        /* Row 5 - 6 stars */
-        radial-gradient(circle at 3% 10%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 6.5% 10%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 13.5% 10%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 17% 10%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 20.5% 10%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        /* Row 6 - 5 stars */
-        radial-gradient(circle at 4.75% 12%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 8.25% 12%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 11.75% 12%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 15.25% 12%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 18.75% 12%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        /* Row 7 - 6 stars */
-        radial-gradient(circle at 3% 14%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 6.5% 14%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 10% 14%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 13.5% 14%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 17% 14%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 20.5% 14%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        /* Row 8 - 5 stars */
-        radial-gradient(circle at 4.75% 16%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 8.25% 16%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 11.75% 16%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 15.25% 16%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 18.75% 16%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        /* Row 9 - 6 stars */
-        radial-gradient(circle at 3% 18%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 6.5% 18%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 10% 18%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 13.5% 18%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 17% 18%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        radial-gradient(circle at 20.5% 18%, rgba(255, 255, 255, 0.9) 0.5%, transparent 0.5%),
-        /* Red and white stripes */
-        repeating-linear-gradient(
-            180deg,
-            rgba(196, 30, 58, 0.3) 0%,
-            rgba(196, 30, 58, 0.3) 7.7%,
-            rgba(255, 255, 255, 0.2) 7.7%,
-            rgba(255, 255, 255, 0.2) 15.4%
-        ),
-        /* Blue canton background */
-        linear-gradient(
-            to right,
-            rgba(0, 40, 104, 0.4) 0%,
-            rgba(0, 40, 104, 0.4) 40%,
-            transparent 40%
-        );
-    opacity: 0.45;
-    animation: realFlagWave 5s ease-in-out infinite;
-    transform-origin: left center;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    opacity: 0.4;
     z-index: 1;
-}
-
-@keyframes realFlagWave {
-    0%, 100% {
-        clip-path: polygon(
-            0% 0%, 5% 1%, 10% 0%, 15% 2%, 20% 1%, 25% 0%, 30% 2%, 35% 1%, 40% 0%, 45% 1%, 50% 2%,
-            55% 1%, 60% 0%, 65% 2%, 70% 1%, 75% 0%, 80% 2%, 85% 1%, 90% 0%, 95% 1%, 100% 2%,
-            100% 100%, 95% 99%, 90% 100%, 85% 98%, 80% 99%, 75% 100%, 70% 98%, 65% 99%, 60% 100%,
-            55% 99%, 50% 98%, 45% 99%, 40% 100%, 35% 99%, 30% 98%, 25% 100%, 20% 99%, 15% 98%,
-            10% 100%, 5% 99%, 0% 98%
-        );
-        filter: brightness(1) contrast(1.05);
-    }
-    25% {
-        clip-path: polygon(
-            0% 2%, 5% 0%, 10% 2%, 15% 1%, 20% 3%, 25% 1%, 30% 0%, 35% 2%, 40% 1%, 45% 3%, 50% 0%,
-            55% 2%, 60% 1%, 65% 0%, 70% 2%, 75% 3%, 80% 1%, 85% 0%, 90% 2%, 95% 1%, 100% 0%,
-            100% 98%, 95% 100%, 90% 98%, 85% 99%, 80% 97%, 75% 99%, 70% 100%, 65% 98%, 60% 99%,
-            55% 100%, 50% 98%, 45% 97%, 40% 99%, 35% 100%, 30% 98%, 25% 99%, 20% 100%, 15% 99%,
-            10% 98%, 5% 100%, 0% 99%
-        );
-        filter: brightness(1.1) contrast(1.1);
-    }
-    50% {
-        clip-path: polygon(
-            0% 1%, 5% 2%, 10% 1%, 15% 0%, 20% 2%, 25% 3%, 30% 1%, 35% 0%, 40% 2%, 45% 1%, 50% 3%,
-            55% 0%, 60% 2%, 65% 1%, 70% 0%, 75% 2%, 80% 0%, 85% 2%, 90% 1%, 95% 3%, 100% 1%,
-            100% 99%, 95% 98%, 90% 99%, 85% 100%, 80% 98%, 75% 99%, 70% 100%, 65% 97%, 60% 98%,
-            55% 100%, 50% 99%, 45% 98%, 40% 100%, 35% 98%, 30% 99%, 25% 97%, 20% 99%, 15% 100%,
-            10% 99%, 5% 98%, 0% 100%
-        );
-        filter: brightness(0.95) contrast(1.05);
-    }
-    75% {
-        clip-path: polygon(
-            0% 0%, 5% 3%, 10% 1%, 15% 2%, 20% 0%, 25% 2%, 30% 3%, 35% 1%, 40% 0%, 45% 2%, 50% 1%,
-            55% 3%, 60% 0%, 65% 2%, 70% 1%, 75% 3%, 80% 1%, 85% 0%, 90% 3%, 95% 2%, 100% 0%,
-            100% 100%, 95% 97%, 90% 99%, 85% 100%, 80% 98%, 75% 97%, 70% 99%, 65% 100%, 60% 98%,
-            55% 99%, 50% 100%, 45% 98%, 40% 97%, 35% 99%, 30% 100%, 25% 98%, 20% 99%, 15% 100%,
-            10% 97%, 5% 99%, 0% 100%
-        );
-        filter: brightness(1.05) contrast(1.08);
-    }
-}
-
-/* Add wave distortion shadow effect */
-.hero::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(0, 0, 0, 0.05) 2%,
-        transparent 4%,
-        rgba(255, 255, 255, 0.03) 6%,
-        transparent 8%
-    );
-    animation: waveDistortion 3s linear infinite;
-    z-index: 2;
-    pointer-events: none;
-}
-
-@keyframes waveDistortion {
-    0%, 100% {
-        transform: translateX(0);
-        opacity: 0.3;
-    }
-    50% {
-        transform: translateX(-30px);
-        opacity: 0.5;
-    }
+    object-fit: cover;
 }
 
 .hero-overlay {
