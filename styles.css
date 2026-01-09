@@ -29,6 +29,57 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     background: var(--white);
+    overflow-x: hidden;
+}
+
+/* Scroll Animation Classes */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    filter: blur(10px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out, filter 0.8s ease-out;
+}
+
+.scroll-animate.animate-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+.scroll-animate.animate-out {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.95);
+    filter: blur(10px);
+}
+
+/* Fizzle effect variations for different elements */
+.fizzle-left {
+    transform: translateX(-80px) translateY(30px) rotate(-5deg) scale(0.9);
+}
+
+.fizzle-right {
+    transform: translateX(80px) translateY(30px) rotate(5deg) scale(0.9);
+}
+
+.fizzle-bounce {
+    animation: fizzleParticles 0.6s ease-out;
+}
+
+@keyframes fizzleParticles {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+        filter: blur(20px) brightness(2);
+    }
+    50% {
+        transform: scale(1.05);
+        filter: blur(5px) brightness(1.3);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0) brightness(1);
+    }
 }
 
 .container {

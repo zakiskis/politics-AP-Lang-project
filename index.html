@@ -267,5 +267,65 @@
         </div>
     </footer>
 
+    <script>
+        // Fizzle scroll animation
+        const animateElements = document.querySelectorAll('.platform-card, .value-item, .quote-box, .scripture-quote, .enhanced-games-highlight, .credential-item, .about-text, .enhanced-content > p, .enhanced-content > h3, .cta-content, .enhanced-games-photo');
+
+        // Add scroll-animate class to all elements
+        animateElements.forEach((el, index) => {
+            el.classList.add('scroll-animate');
+            // Alternate between left and right fizzle
+            if (index % 3 === 0) el.classList.add('fizzle-left');
+            else if (index % 3 === 1) el.classList.add('fizzle-right');
+        });
+
+        function checkScroll() {
+            const windowHeight = window.innerHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollBottom = scrollTop + windowHeight;
+
+            animateElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top + scrollTop;
+                const elementBottom = elementTop + el.offsetHeight;
+                const elementMiddle = elementTop + (el.offsetHeight / 2);
+
+                // Element is in the "fizzle in" zone (entering from bottom)
+                if (elementMiddle > scrollTop && elementMiddle < scrollBottom) {
+                    el.classList.add('animate-in');
+                    el.classList.remove('animate-out');
+
+                    // Add bounce effect when first appearing
+                    if (!el.classList.contains('has-fizzled')) {
+                        el.classList.add('fizzle-bounce', 'has-fizzled');
+                        setTimeout(() => el.classList.remove('fizzle-bounce'), 600);
+                    }
+                }
+                // Element is above viewport (fizzle out at top)
+                else if (elementBottom < scrollTop + 100) {
+                    el.classList.remove('animate-in');
+                    el.classList.add('animate-out');
+                }
+                // Element is below viewport (reset for next scroll up)
+                else if (elementTop > scrollBottom) {
+                    el.classList.remove('animate-in', 'animate-out');
+                }
+            });
+        }
+
+        // Throttle scroll events for performance
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = window.requestAnimationFrame(checkScroll);
+        });
+
+        // Initial check
+        checkScroll();
+
+        // Check on page load after images load
+        window.addEventListener('load', checkScroll);
+    </script>
 </body>
 </html>
